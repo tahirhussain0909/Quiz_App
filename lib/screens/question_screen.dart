@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:quiz_app/widgets/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
-=======
->>>>>>> origin/main
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
@@ -15,7 +12,6 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   @override
   Widget build(context) {
-<<<<<<< HEAD
     final currentQuestion = questions[0];
     return SizedBox(
       width: double.infinity,
@@ -58,8 +54,5 @@ class _QuestionScreenState extends State<QuestionScreen> {
         ],
       ),
     );
-=======
-    return const Text('hwllo');
->>>>>>> origin/main
   }
 }
