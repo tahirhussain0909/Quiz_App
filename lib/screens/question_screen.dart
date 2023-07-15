@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/widgets/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
 
-class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({
+class QuestionsScreen extends StatefulWidget {
+  const QuestionsScreen({
     super.key,
     required this.onSelectAnswer,
   });
@@ -12,28 +12,31 @@ class QuestionScreen extends StatefulWidget {
   final void Function(String answer) onSelectAnswer;
 
   @override
-  State<QuestionScreen> createState() => _QuestionScreenState();
+  State<QuestionsScreen> createState() {
+    return _QuestionsScreenState();
+  }
 }
 
-class _QuestionScreenState extends State<QuestionScreen> {
+class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
   void answerQuestion(String selectedAnswer) {
-    widget.onSelectAnswer('...');
+    widget.onSelectAnswer(selectedAnswer);
+    // currentQuestionIndex = currentQuestionIndex + 1;
+    // currentQuestionIndex += 1;
     setState(() {
-      //currentQuestionIndex = currentQuestionIndex + 1;
-      //currentQuestionIndex += 1;
-      currentQuestionIndex++;
+      currentQuestionIndex++; // increments the value by 1
     });
   }
 
   @override
   Widget build(context) {
     final currentQuestion = questions[currentQuestionIndex];
-    return Container(
-      margin: const EdgeInsets.all(40),
-      child: SizedBox(
-        width: double.infinity,
+
+    return SizedBox(
+      width: double.infinity,
+      child: Container(
+        margin: const EdgeInsets.all(40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -47,35 +50,15 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(
-              height: 30,
-            ),
-            ...currentQuestion.getShuffledAnswers().map(
-              (answer) {
-                return AnswerButton(
-                  answerText: answer,
-                  onTap: () {
-                    answerQuestion(answer);
-                  },
-                );
-              },
-            ),
-            // AnswerButton(
-            //   answerText: currentQuestion.answers[0],
-            //   onTap: () {},
-            // ),
-            // AnswerButton(
-            //   answerText: currentQuestion.answers[1],
-            //   onTap: () {},
-            // ),
-            // AnswerButton(
-            //   answerText: currentQuestion.answers[2],
-            //   onTap: () {},
-            // ),
-            // AnswerButton(
-            //   answerText: currentQuestion.answers[3],
-            //   onTap: () {},
-            // ),
+            const SizedBox(height: 30),
+            ...currentQuestion.shuffledAnswers.map((answer) {
+              return AnswerButton(
+                answerText: answer,
+                onTap: () {
+                  answerQuestion(answer);
+                },
+              );
+            })
           ],
         ),
       ),
